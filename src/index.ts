@@ -5,6 +5,9 @@ import serveStatic from "serve-static";
 import dotenv from "dotenv";
 
 import shopify from "./shopify.js";
+import { prisma } from "./libs/prisma/index.js";
+
+import saveCartRouter from "./routes/api/saveCartRouter..js";
 
 dotenv.config();
 
@@ -32,6 +35,11 @@ app.use(express.json());
 // All endpoints after this point will require an active session
 app.use("/api/*", shopify.validateAuthenticatedSession());
 
+app.use(
+  "/api",
+  shopify.validateAuthenticatedSession(),
+  saveCartRouter
+);
 app.use(serveStatic(`${process.cwd()}/frontend/`, { index: false }));
 
 app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res) => {
