@@ -8,6 +8,7 @@ import shopify from "./shopify.js";
 import { prisma } from "./libs/prisma/index.js";
 
 import saveCartRouter from "./routes/api/saveCartRouter..js";
+import inventoryRoutes from "./routes/api/inventory.routes.js";
 
 dotenv.config();
 
@@ -38,7 +39,12 @@ app.use("/api/*", shopify.validateAuthenticatedSession());
 app.use(
   "/api",
   shopify.validateAuthenticatedSession(),
-  saveCartRouter
+  saveCartRouter  
+);
+app.use(
+  "/api/inventory",
+  shopify.validateAuthenticatedSession(),
+  inventoryRoutes
 );
 app.use(serveStatic(`${process.cwd()}/frontend/`, { index: false }));
 

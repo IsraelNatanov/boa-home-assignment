@@ -14,6 +14,7 @@
     "@shopify/cli": "^3.84.0",
     "@shopify/ui-extensions": "2024.10.1",
     "@shopify/ui-extensions-react": "2024.10.1",
+    "csv-parse": "^6.1.0",
     "react": "^18.3.1"
   },
   "author": "BOA Ideas",
